@@ -61,7 +61,6 @@ def ball_start():
         ball_speed_x = 7 * random.choice((1,-1))
         score_time = None
 
-
 pygame.init()
 clock = pygame.time.Clock()
 
@@ -136,9 +135,9 @@ while True:
         ball_start()
 
     player_text = game_font.render(f"{player_score}", False, light_grey)
-    screen.blit(player_text,(screen_width/2+20,screen_height/2+150))
+    screen.blit(player_text,(screen_width*3/4-30,screen_height/2+150))
     opponent_text = game_font.render(f"{opponent_score}", False, light_grey)
-    screen.blit(opponent_text,(screen_width/2-90,screen_height/2+150))
+    screen.blit(opponent_text,(screen_width/4-30,screen_height/2+150))
 
     pygame.display.flip()
     clock.tick(60)
