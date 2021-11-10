@@ -27,6 +27,13 @@ def player_animation():
     if player.bottom >= screen_height:
         player.bottom = screen_height-5
 
+def opponent_animation():
+    opponent.y += opponent_speed
+    if opponent.top <= 0:
+        opponent.top = 5
+    if opponent.bottom >= screen_height:
+        opponent.bottom = screen_height-5
+
 def opponent_ai():
     if opponent.top < ball.y:
         opponent.top += opponent_speed
@@ -57,8 +64,8 @@ def ball_start():
         ball_speed_x = 0
         ball_speed_y = 0
     else:
-        ball_speed_y = 7 * random.choice((1,-1))
-        ball_speed_x = 7 * random.choice((1,-1))
+        ball_speed_y = 8 * random.choice((1,-1))
+        ball_speed_x = 8  * random.choice((1,-1))
         score_time = None
 
 pygame.init()
@@ -68,7 +75,11 @@ pygame.mixer.init()
 pygame.mixer.music.load("assets/backgroundmusic.ogg")
 pygame.mixer.music.play(loops=-1)
 
+JoyName = pygame.joystick.Joystick(0).get_name()
+print("Name of the joystick:" + JoyName)
+
 pygame.joystick.init()
+joysticks = [pygame.joystick.Joystick(x) for x in range(pygame.joystick.get_count())]
 
 screen_width = 800
 screen_height = 600
@@ -89,11 +100,11 @@ player_sound = pygame.mixer.Sound("assets/pong_player.wav")
 goal_sound = pygame.mixer.Sound("assets/goal.wav")
 restart_sound = pygame.mixer.Sound("assets/restart.wav")
 
-ball_speed_x = 5 * random.choice((1,-1))
-ball_speed_y = 5 * random.choice((1,-1))
+ball_speed_x = 100 * random.choice((1,-1))
+ball_speed_y = 100 * random.choice((1,-1))
 
 player_speed = 0
-opponent_speed = 7
+opponent_speed = 0
 
 player_score = 0
 opponent_score = 0
@@ -111,18 +122,28 @@ while True:
             sys.exit()
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_DOWN:
-                player_speed += 7
+                opponent_speed += 7
             if event.key == pygame.K_UP:
-                player_speed -=7
+                opponent_speed -=7
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_DOWN:
-                player_speed -= 7
+                opponent_speed -= 7
             if event.key == pygame.K_UP:
+                opponent_speed += 7
+        
+        if event.type == pygame.JOYHATMOTION:
+            print(event)
+            print(event.value)
+            if event.value == (-1,0):
                 player_speed += 7
+            if event.value == (1,0):
+                player_speed -= 7
+            if event.value[0] == 0:
+                player_speed = 0
 
     ball_animation()
     player_animation()
-    opponent_ai()
+    opponent_animation()
 
     screen.fill(bg_color)
     screen.blit(bg,(0,0))
