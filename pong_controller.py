@@ -18,7 +18,7 @@ def my_ball_animation():
         
 
 def my_square_animation():
-    #my_square.x += motion[0] * 10
+    my_square.x += motion[0] * 10
     my_square.y += motion[1] * 10
     if my_square.top <= 0:
         my_square.top = 0
