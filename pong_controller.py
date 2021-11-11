@@ -14,6 +14,7 @@ def my_ball_animation():
 
     if my_ball.colliderect(my_square):
         ball_speed[1] *= -1
+        #ball_speed[0] *= -1
         
 
 def my_square_animation():
