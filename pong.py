@@ -1,5 +1,7 @@
 import pygame, sys, random
 
+#pong with keyboard
+
 def ball_animation():
     global ball_speed_x, ball_speed_y, player_score, opponent_score, score_time
     ball.x += ball_speed_x

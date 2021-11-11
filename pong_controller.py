@@ -44,7 +44,7 @@ my_ball = pygame.Rect(10,10,10,10)
 my_square_color = 0
 colors = [pygame.Color("green"), pygame.Color("orange"), pygame.Color("blue"), pygame.Color("yellow")]
 motion = [0, 0]
-ball_speed = [1, 1]
+ball_speed = [5, 5]
 run = True
 
 while run:
