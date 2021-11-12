@@ -71,8 +71,8 @@ def ball_start():
         ball_speed_x = 0
         ball_speed_y = 0
     else:
-        ball_speed_y = 10 * random.choice((1,-1))
-        ball_speed_x = 10 * random.choice((1,-1))
+        ball_speed_y = 7 * random.choice((1,-1))
+        ball_speed_x = 7 * random.choice((1,-1))
         score_time = None
 
 
@@ -96,8 +96,8 @@ height = pygame.display.Info().current_h
 width = pygame.display.Info().current_w
 
 ball = pygame.Rect(screen_width/2 - 15, screen_height/2 - 15, 30, 30)
-player = pygame.Rect(screen_width - 20, screen_height/2 - 70, 10, 140)
-opponent = pygame.Rect(10,screen_height/2 -70, 10, 140)
+player = pygame.Rect(screen_width - 30, screen_height/2 - 70, 20, 140)
+opponent = pygame.Rect(10,screen_height/2 -70, 20, 140)
 
 bg_color = pygame.Color("black")
 bg = pygame.image.load("assets/starfield.gif")
@@ -206,16 +206,16 @@ while run:
 
 
 
-    pygame.draw.rect(screen, light_grey, player)
-    pygame.draw.rect(screen, light_grey, opponent)
+    pygame.draw.rect(screen, light_grey, player,  10, 4)
+    pygame.draw.rect(screen, light_grey, opponent, 10, 4)
     pygame.draw.ellipse(screen, light_grey, ball)
     
     if score_time:
         ball_start()
 
-    player_text = game_font.render(f"{player_score}", False, light_grey)
+    player_text = game_font.render(f"{player_score}", True, light_grey)
     screen.blit(player_text,(screen_width/4+40,screen_height/2+150))
-    opponent_text = game_font.render(f"{opponent_score}", False, light_grey)
+    opponent_text = game_font.render(f"{opponent_score}", True, light_grey)
     screen.blit(opponent_text,(screen_width*3/4-100,screen_height/2+150))
 
     pygame.display.flip()
