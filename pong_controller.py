@@ -1,6 +1,6 @@
 import pygame, sys, random
 
-#pong with keyboard
+#pong with keyboard and controller
 
 def ball_animation():
     global ball_speed_x, ball_speed_y, player_score, opponent_score, score_time
@@ -39,8 +39,12 @@ def player_animation():
     player.x += player_speed[0]
     if player.top <= 0:
         player.top = 5
-    if player.bottom >= screen_height:
-        player.bottom = screen_height-5
+    elif player.right >= screen_width:
+        player.right = screen_width - 5
+    elif player.left <= 0:
+        player.left = 5
+    elif player.bottom >= screen_height:
+        player.bottom = screen_height - 5
 
 def opponent_ai():
     if opponent.top < ball.y:
@@ -166,12 +170,14 @@ while run:
         elif event.type == pygame.JOYAXISMOTION:
             if event.axis < 2:
                 player_speed[event.axis] = event.value * 7
-        if event.type == pygame.KEYDOWN:
+        elif event.type == pygame.JOYBUTTONDOWN:
+            my_square_color = event.button
+        elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_DOWN:
                 player_speed[1] += 7
             if event.key == pygame.K_UP:
                 player_speed[1] -= 7
-        if event.type == pygame.KEYUP:
+        elif event.type == pygame.KEYUP:
             if event.key == pygame.K_DOWN:
                 player_speed[1] -= 7
             if event.key == pygame.K_UP:
@@ -215,9 +221,9 @@ while run:
         ball_start()
 
     player_text = game_font.render(f"{player_score}", True, light_grey)
-    screen.blit(player_text,(screen_width/4+40,screen_height/2+150))
+    screen.blit(player_text,(screen_width*3/4-100,screen_height/2+150))
     opponent_text = game_font.render(f"{opponent_score}", True, light_grey)
-    screen.blit(opponent_text,(screen_width*3/4-100,screen_height/2+150))
+    screen.blit(opponent_text,(screen_width/4+30,screen_height/2+150))
 
     pygame.display.flip()
     clock.tick(60)

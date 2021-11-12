@@ -5,8 +5,9 @@ from pygame.constants import JOYAXISMOTION
 #Pong with Controller
 
 class animation():
-    def __init__(self,speed):
+    def __init__(self, speed, ball_rect):
         self.speed = speed
+        self.ball = ball_rect
 
 def my_ball_animation():
     my_ball.x += ball_speed[0]
