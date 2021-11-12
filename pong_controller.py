@@ -36,6 +36,7 @@ def ball_animation():
 
 def player_animation():
     player.y += player_speed[1]
+    player.x += player_speed[0]
     if player.top <= 0:
         player.top = 5
     if player.bottom >= screen_height:
